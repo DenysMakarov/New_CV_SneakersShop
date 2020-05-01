@@ -87,7 +87,6 @@ function cheangePag(prod) {
                 countPag[i].classList.remove("active_pag");
             }
             e.target.classList.add("active_pag");
-
         })
     })
 }
@@ -109,9 +108,9 @@ changeWoman.addEventListener("click", (e) => {
     current = 0;
     mainProd = optionSex(products, woman);  // from modules
     console.log(mainProd)
-        shareRender(mainProd);
-        searchProd(mainProd);
-        return mainProd
+    shareRender(mainProd);
+    searchProd(mainProd);
+    return mainProd
 });
 changeChildren.addEventListener("click", (e) => {
     current = 0;
@@ -129,7 +128,6 @@ changeAll.addEventListener("click", (e) => {
 });
 
 
-
 function search(prod) {
     current = 0;
     paginationBox.innerHTML = "";
@@ -141,12 +139,8 @@ function search(prod) {
 
 function searchProd(prod) {
     btn_search.addEventListener("click", (e) => {
-        if (searchForm.value == "") {
-            // boxContent.innerHTML ="hDJLHSDJKhLHJKD"
-        } else {
-            search(prod);
-            console.log("kjjkj")
-        }
+        search(prod);
+
         setNameForPoupPup()
 
     });
@@ -204,13 +198,6 @@ export function sumCartPrice(cartCount) {
 
 
 ////////////////////////
-//      //      //      // => about how CAN USE Event through ","
-
-// let buttom_test = document.getElementById("buttom_test");
-// buttom_test,addEventListener("click", (e) => {
-//     let y = Array.from(document.getElementsByClassName("show_more"));
-//     console.log(y[2].dataset.name)
-// })
 
 let cartCount = [];
 
@@ -313,19 +300,17 @@ openCartList("fixed_cart");
 openCartList("nav_item_cart");
 openCartList("basket425");
 
-
-
-
-function cartEmpty(){
+function cartEmpty() {
     if (cartCount.length == 0) {
         document.getElementById("cordCount").innerHTML = "Empty";
         document.getElementById("fixed_cart").style.width = "130px";
-
         document.getElementById("cart_summarise_prise").innerHTML = "$0"
-    }else if(cartCount.length != 0){
-        document.getElementById("fixed_cart").style.width = "60px";
+    } else if (cartCount.length != 0) {
+        document.getElementById("fixed_cart").style.width = "155px";
+        document.getElementById("cordCount").innerHTML = cartCount.length + " = " + "$" +sumCartPrice(cartCount)
     }
 }
+
 cartEmpty()
 
 // document.getElementById("cartBox").innerHTML = "0"
