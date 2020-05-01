@@ -306,11 +306,11 @@ function cartEmpty() {
         document.getElementById("fixed_cart").style.width = "130px";
         document.getElementById("cart_summarise_prise").innerHTML = "$0"
     } else if (cartCount.length != 0) {
-        document.getElementById("fixed_cart").style.width = "155px";
+        document.getElementById("fixed_cart").style.width = "160px";
         document.getElementById("cordCount").innerHTML = cartCount.length + " = " + "$" +sumCartPrice(cartCount)
     }
 }
 
-cartEmpty()
+cartEmpty();
 
 // document.getElementById("cartBox").innerHTML = "0"
