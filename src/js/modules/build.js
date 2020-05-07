@@ -105,7 +105,7 @@ export class Builder {
 
     ///////////////////////
 
-    createTableOfOrders(prod, cartCount) {
+    createTableOfOrders(prod) {
         let ListOfOrdersWrap = document.getElementById("cart_list");
         ListOfOrdersWrap.innerHTML = "";
         ///////// => block top
@@ -133,14 +133,14 @@ export class Builder {
             CardBlockCener.style.backgroundImage = "url(images/" + prod[i].imgEl + ")";
             let cartItem = Builder.appChild(Builder.createNewElement("div", "item_of_card"), [CardBlockLeft, CardBlockCener, CardBlockRight]);
 
-            cartItemBlockTop.appendChild(cartItem);
+            cartItemBlockTop.appendChild(cartItem);  // => will add to boxOfCart
         }
 
         ///////// => block bottom
         let commonGoods = Builder.appChild(Builder.createNewElement("p"), [Builder.createNewElement("span", "item_block_bottom_desc_first", "GOODS: "), Builder.createNewElement("span", "item_block_bottom_desc_second", prod.length + " items")])
         let commonSum = Builder.appChild(Builder.createNewElement("p"), [Builder.createNewElement("span", "item_block_bottom_desc_first", "SUM: "), Builder.createNewElement("span", "item_block_bottom_desc_second", "$" + sumCartPrice(prod))])
         let BottonBuy = Builder.createNewElement("div", "buttom_cart_buy", "BUY", [{"name":"id", "value":"buttom_cart_buy"}]);
-        let cartItemBlockBottom = Builder.appChild(Builder.createNewElement("div", "item_block_bottom" ), [commonGoods, commonSum, BottonBuy] );
+        let cartItemBlockBottom = Builder.appChild(Builder.createNewElement("div", "item_block_bottom" ), [commonGoods, commonSum, BottonBuy] ); // => will add to boxOfCart
 
         ///////// => main box cart
         let boxOfCart = Builder.appChild(Builder.createNewElement("div", "box_of_cart", null, [{"name":"id", "value":"box_of_cart"}]), [cartItemBlockTop, cartItemBlockBottom]);

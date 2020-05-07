@@ -1,15 +1,15 @@
 import {isLogin} from "./modules/test_login";
+
 const loginTest = new isLogin();
 
 
 let buttonShowConten = document.getElementById("show_content");
 let buttonSubmit = document.getElementById("button_submit");
-let jsItem_box = document.getElementById("jsItem_box");
 let logoutButton = document.getElementById("logout");
 let buttonShowContenTrue = 0;
 
 
-let submitHandler =(e)=>{
+let submitHandler = (e) => {
     e.preventDefault();
 
     const email = document.getElementById("check_email").value;
@@ -21,45 +21,61 @@ let submitHandler =(e)=>{
     const redPass = document.getElementById("error_password");
 
     //Ex
-    if (!loginTest.isSubmitDog(email)){
+    if (!loginTest.isSubmitDog(email)) {
         emailErr.push(" You forgot '@' or '.' ")
     }
-    if (!loginTest.isWord(email)){
+    if (!loginTest.isWord(email)) {
         emailErr.push(" Please enter a-z A-Z, ")
     }
 
-    if (! loginTest.isLowerWord(password)){
+    if (!loginTest.isLowerWord(password)) {
         passErr.push(" Please enter a-z")
     }
-    if (! loginTest.isUpperWord(password)){
+    if (!loginTest.isUpperWord(password)) {
         passErr.push(" Please enter A-Z")
     }
-    if (! loginTest.isNumber(password)){
+    if (!loginTest.isNumber(password)) {
         passErr.push(" Please enter 0-9");
     }
 
     // email
     switch (emailErr.length > 0) {
-        case true : redEmail.innerHTML = emailErr; redEmail. style.color = "red"; break;
-        case false : redEmail.innerHTML = "all right"; redEmail. style.color = "green"
+        case true :
+            redEmail.innerHTML = emailErr;
+            redEmail.style.color = "red";
+            break;
+        case false :
+            redEmail.innerHTML = "all right";
+            redEmail.style.color = "green"
     }
 
     // password
     switch (passErr.length > 0) {
-        case true : redPass.innerHTML = passErr; redPass. style.color = "red"; break;
-        case false : redPass.innerHTML = "all right"; redPass. style.color = "green"
+        case true :
+            redPass.innerHTML = passErr;
+            redPass.style.color = "red";
+            break;
+        case false :
+            redPass.innerHTML = "all right";
+            redPass.style.color = "green"
     }
 
     // check true login & password
     switch (passErr.length == 0 && emailErr.length == 0) {
-        case true : loginTest.loginFalse(buttonShowConten, buttonSubmit, buttonShowContenTrue); buttonShowContenTrue = 1; break;
-        case false : loginTest.loginTrue(buttonShowConten, buttonSubmit, buttonShowContenTrue); buttonShowContenTrue = 0
+        case true :
+            loginTest.loginFalse(buttonShowConten, buttonSubmit, buttonShowContenTrue);
+            buttonShowContenTrue = 1;
+            break;
+        case false :
+            loginTest.loginTrue(buttonShowConten, buttonSubmit, buttonShowContenTrue);
+            buttonShowContenTrue = 0
     }
 
-    if (passErr.length != 0 && emailErr.length != 0){
-        buttonSubmit.addEventListener("submit",  wrong_submit(buttonSubmit), false);
+    if (passErr.length != 0 && emailErr.length != 0) {
+        buttonSubmit.addEventListener("submit", wrong_submit(buttonSubmit), false);
     }
     addShowContentEvent();
+    console.log(buttonShowContenTrue)
 };
 
 export function wrong(buttonSubmit) {
@@ -67,7 +83,7 @@ export function wrong(buttonSubmit) {
 }
 
 function wrong_submit(buttonSubmit) {
-    buttonSubmit.addEventListener("click", (e)=>{
+    buttonSubmit.addEventListener("click", (e) => {
         buttonSubmit.style.animationName = "submit_wrong";
 
         setTimeout(function () {
@@ -75,39 +91,32 @@ function wrong_submit(buttonSubmit) {
         }, 500);
     })
 }
+
 // FUNCTIOUN TEST
 function addShowContentEvent() {
     switch (buttonShowContenTrue) {
         case 1 :
-            loginTest.BSCT_1(); break; //// => from module
+            loginTest.BSCT_1();
+            break; //// => from module
         case 0 :
             loginTest.BSCT_0()         //// => from module
     }
 }
 
 
-
 document.addEventListener("submit", submitHandler, false);
-logoutButton.addEventListener("click", (e)=>{loginTest.loginPageApear()});
+logoutButton.addEventListener("click", (e) => {
+    loginTest.loginPageApear()
+});
 
-// logout();
 
 let arrBottomsOption = Array.from(document.getElementsByClassName("buttom_option"));
-for(let i = 0; i <arrBottomsOption.length; i++){
-    arrBottomsOption[i].addEventListener("click", (e)=>{
-        for(let i = 0; i < arrBottomsOption.length ; i++){
+for (let i = 0; i < arrBottomsOption.length; i++) {
+    arrBottomsOption[i].addEventListener("click", (e) => {
+        for (let i = 0; i < arrBottomsOption.length; i++) {
             arrBottomsOption[i].classList.remove("button_option_untouch")
         }
         e.target.classList.add("button_option_untouch")
     });
 }
-//
-// function activePag() {
-//   let activeP = Array.from(document.getElementsByClassName("pag_item"));
-//    // console.log(activeP);
-// }
-//
-// setTimeout(function () {
-//     activePag()
-// }, 10)
 

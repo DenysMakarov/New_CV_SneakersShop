@@ -2,13 +2,10 @@ import {wrong} from "../forms";
 
 export class isLogin {
 
-    constructor(buttonShowContenTrue) {
-        this.logout = document.getElementById("logout");
+    constructor() {
         this.emailBox = document.getElementById("email_box");
         this.buttonShowConten = document.getElementById("show_content");
-        this.buttonSubmit = document.getElementById("button_submit");
         this.jsItem_box = document.getElementById("jsItem_box");
-        this.buttonShowContenTrue = buttonShowContenTrue;
     }
 
     // test email //
@@ -57,7 +54,7 @@ export class isLogin {
 
 
 
-     BSCT_1() {
+     BSCT_1() {  // => button show content
         this.buttonShowConten.addEventListener("click", (e)=>{
 
             this.emailBox.style.animationName = "ep_disapear";
@@ -87,14 +84,12 @@ export class isLogin {
     }
     BSCT_0() {
         setTimeout(function () {
-            // jsItem_box.style.backgroundColor = "blue"
+            jsItem_box.style.backgroundColor = "transparent"
         },1000)
     }
     loginPageApear(){
         this.emailBox.style.animationName = "ep_apear";
-
         this.buttonShowConten.classList.add("button_submit_untouch");
-        // this.buttonShowConten.classList.add("button_submit_touch");
 
         setTimeout(function () {
             document.getElementById("password_box").style.animationName = "ep_apear";
@@ -113,6 +108,5 @@ export class isLogin {
         },10);
 
         ///// ADD KEYFRAMES DISAPPEAR RANGE
-
     }
 }

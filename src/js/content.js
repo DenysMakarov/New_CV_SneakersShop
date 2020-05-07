@@ -43,7 +43,7 @@ function shareRender(prod) {
 shareRender(mainProd);
 searchProd(mainProd);
 
-///////     FUNCTIONS
+///////     build amount items on the page
 function firstI() {
     return current * per_page;
 };
@@ -56,6 +56,7 @@ function secondI(i, prod) {
 function renderProd(prod) {
     boxContent.innerHTML = "";
     for (let i = firstI(); secondI(i, prod); i++) {
+        console.log(secondI(i, prod))
         boxContent.appendChild(createCards.createCard(prod[i]))
     }
     countPercent_AddCurrency("boxSale", "down_coast_shoe");
@@ -107,7 +108,6 @@ changeMan.addEventListener("click", (e) => {
 changeWoman.addEventListener("click", (e) => {
     current = 0;
     mainProd = optionSex(products, woman);  // from modules
-    console.log(mainProd)
     shareRender(mainProd);
     searchProd(mainProd);
     return mainProd
@@ -131,7 +131,7 @@ changeAll.addEventListener("click", (e) => {
 function search(prod) {
     current = 0;
     paginationBox.innerHTML = "";
-    let searchRegExp = new RegExp(searchForm.value, ["ig"]);
+    let searchRegExp = new RegExp(searchForm.value, ["i"]);
     prod = prod.filter(el => searchRegExp.test(el.name));
     shareRender(prod);
     return mainProd = prod;
@@ -140,9 +140,7 @@ function search(prod) {
 function searchProd(prod) {
     btn_search.addEventListener("click", (e) => {
         search(prod);
-
         setNameForPoupPup()
-
     });
 
     searchForm.addEventListener("keypress", (e) => {
@@ -219,7 +217,6 @@ function setNameForPoupPup() {
 
                     // build Cart =>
                     createCartList()
-
                 }
             }
         })
@@ -237,7 +234,7 @@ function createCartList() {
                 cartCount.push(products[i]);
                 creatCart.createBoxWish(cartCount);
                 creatCart.createCartFixed(cartCount)//???
-                cartEmpty()
+                cartEmpty();
 
 
                 document.getElementById("cart_summarise_prise").innerHTML = "$" + sumCartPrice(cartCount); // => top cart;
@@ -253,7 +250,7 @@ function openCartList(cartEl) {
     let cartList = document.getElementById("cart_list");
     cartList.innerHTML = ""
 
-    createListOfOrders.createTableOfOrders(cartCount, cartCount);
+    createListOfOrders.createTableOfOrders(cartCount);
 
     let removeArr = Array.from(document.getElementsByClassName("remove_item_card"))
     removeArr = removeArr.map((el) => {
@@ -301,16 +298,15 @@ openCartList("nav_item_cart");
 openCartList("basket425");
 
 function cartEmpty() {
+    let cordCount = document.getElementById("cordCount")
     if (cartCount.length == 0) {
-        document.getElementById("cordCount").innerHTML = "Empty";
+        cordCount.innerHTML = "Empty";
         document.getElementById("fixed_cart").style.width = "130px";
         document.getElementById("cart_summarise_prise").innerHTML = "$0"
     } else if (cartCount.length != 0) {
-        document.getElementById("fixed_cart").style.width = "160px";
-        document.getElementById("cordCount").innerHTML = cartCount.length + " = " + "$" +sumCartPrice(cartCount)
+        document.getElementById("fixed_cart").style.width = "165px";
+        cordCount.innerHTML = cartCount.length + " = " + "$" +sumCartPrice(cartCount)
     }
 }
-
 cartEmpty();
 
-// document.getElementById("cartBox").innerHTML = "0"

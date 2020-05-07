@@ -38,9 +38,5 @@ export class Data {
         }
        return products = load_products;
     }
-
-    static getProducts() {
-        return products;
-    }
 }
 
