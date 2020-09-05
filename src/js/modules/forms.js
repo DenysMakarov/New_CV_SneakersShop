@@ -1,12 +1,12 @@
-import {isLogin} from "./modules/test_login";
+import {isLogin} from "./test_login";
 
 const loginTest = new isLogin();
 
 
-let buttonShowConten = document.getElementById("show_content");
+let buttonShowContent = document.getElementById("show_content");
 let buttonSubmit = document.getElementById("button_submit");
 let logoutButton = document.getElementById("logout");
-let buttonShowContenTrue = 0;
+let buttonShowContentTrue = 0;
 
 
 let submitHandler = (e) => {
@@ -63,27 +63,26 @@ let submitHandler = (e) => {
     // check true login & password
     switch (passErr.length == 0 && emailErr.length == 0) {
         case true :
-            loginTest.loginFalse(buttonShowConten, buttonSubmit, buttonShowContenTrue);
-            buttonShowContenTrue = 1;
+            loginTest.loginFalse(buttonShowContent, buttonSubmit, buttonShowContentTrue);
+            buttonShowContentTrue = 1;
             break;
         case false :
-            loginTest.loginTrue(buttonShowConten, buttonSubmit, buttonShowContenTrue);
-            buttonShowContenTrue = 0
+            loginTest.loginTrue(buttonShowContent, buttonSubmit, buttonShowContentTrue);
+            buttonShowContentTrue = 0
     }
 
     if (passErr.length != 0 && emailErr.length != 0) {
-        buttonSubmit.addEventListener("submit", wrong_submit(buttonSubmit), false);
+        buttonSubmit.addEventListener("submit", wrongSubmit(buttonSubmit), false);
     }
     addShowContentEvent();
-    console.log(buttonShowContenTrue)
 };
 
 export function wrong(buttonSubmit) {
     buttonSubmit.style.animationName = "wrong";
 }
 
-function wrong_submit(buttonSubmit) {
-    buttonSubmit.addEventListener("click", (e) => {
+function wrongSubmit(buttonSubmit) {
+    buttonSubmit.addEventListener("click", () => {
         buttonSubmit.style.animationName = "submit_wrong";
 
         setTimeout(function () {
@@ -94,23 +93,23 @@ function wrong_submit(buttonSubmit) {
 
 // FUNCTIOUN TEST
 function addShowContentEvent() {
-    switch (buttonShowContenTrue) {
+    switch (buttonShowContentTrue) {
         case 1 :
-            loginTest.BSCT_1();
-            break; //// => from module
+            loginTest.BSCTrue();
+            break;                       //// => from module
         case 0 :
-            loginTest.BSCT_0()         //// => from module
+            loginTest.BSCFalse()         //// => from module
     }
 }
 
 
 document.addEventListener("submit", submitHandler, false);
-logoutButton.addEventListener("click", (e) => {
-    loginTest.loginPageApear()
+logoutButton.addEventListener("click", () => {
+    loginTest.loginPageAppear()
 });
 
 
-let arrBottomsOption = Array.from(document.getElementsByClassName("buttom_option"));
+let arrBottomsOption = Array.from(document.getElementsByClassName("button_option"));
 for (let i = 0; i < arrBottomsOption.length; i++) {
     arrBottomsOption[i].addEventListener("click", (e) => {
         for (let i = 0; i < arrBottomsOption.length; i++) {

@@ -1,4 +1,4 @@
-import {wrong} from "../forms";
+import {wrong} from "./forms";
 
 export class isLogin {
 
@@ -31,30 +31,30 @@ export class isLogin {
     }
 
     // remove / add class:
-    loginTrue(buttonShowConten, buttonSubmit) {
-        buttonShowConten.classList.remove("button_submit_untouch");
+    loginTrue(buttonShowContent, buttonSubmit) {
+        buttonShowContent.classList.remove("button_submit_untouch");
         buttonSubmit.classList.remove("button_submit_touch");
 
-        buttonShowConten.classList.add("button_submit_touch");
+        buttonShowContent.classList.add("button_submit_touch");
         buttonSubmit.classList.add("button_submit_untouch");
 
-        buttonShowConten.innerHTML = "You will see main content after registration";
+        buttonShowContent.innerHTML = "You will see main content after registration";
     }
 
-    loginFalse(buttonShowConten, buttonSubmit) {
-        buttonShowConten.classList.remove("button_submit_touch");
+    loginFalse(buttonShowContent, buttonSubmit) {
+        buttonShowContent.classList.remove("button_submit_touch");
         buttonSubmit.classList.remove("button_submit_untouch");
 
-        buttonShowConten.classList.add("button_submit_untouch");
+        buttonShowContent.classList.add("button_submit_untouch");
         buttonSubmit.classList.add("button_submit_touch");
 
         buttonSubmit.addEventListener("click", wrong(buttonSubmit), false);
-        buttonShowConten.innerHTML = "Push button to see all range";
+        buttonShowContent.innerHTML = "Push button to see all range";
     }
 
 
 
-     BSCT_1() {  // => button show content
+     BSCTrue() {  // => button show content
         this.buttonShowConten.addEventListener("click", (e)=>{
 
             this.emailBox.style.animationName = "ep_disapear";
@@ -71,7 +71,7 @@ export class isLogin {
                 document.getElementById("show_content").style.animationName = "show_content_disapear";
             },350);
             setTimeout(function () {
-                this.jsItem_box.style.zIndex = "1111111111";
+                this.jsItem_box.style.zIndex = "100000";
                 document.getElementById("js_content_box_wrap").classList.add("js_content_box_change");
                 document.getElementById("jsItem_box_wrap").style.bottom = "115px";
                 document.getElementById("js_range_title").style.opacity = "1";
@@ -79,15 +79,14 @@ export class isLogin {
 
             },700);
             ///// ADD KEYFRAMES APPEAR RANGE
-
         })
     }
-    BSCT_0() {
+    BSCFalse() {
         setTimeout(function () {
             jsItem_box.style.backgroundColor = "transparent"
         },1000)
     }
-    loginPageApear(){
+    loginPageAppear(){
         this.emailBox.style.animationName = "ep_apear";
         this.buttonShowConten.classList.add("button_submit_untouch");
 

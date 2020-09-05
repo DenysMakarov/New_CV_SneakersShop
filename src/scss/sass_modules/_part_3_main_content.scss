@@ -202,7 +202,7 @@ position: relative;
   clear: both;
 }
 
-.main_discription {
+.main_description {
   width: 1200px;
   margin:  auto;
   @media screen and (max-width: 1025px){
@@ -221,7 +221,7 @@ position: relative;
 
 
 //MAIN PICTURE
-.main_discription_top_left_shoes {
+.main_description_top_left_shoes {
   box-sizing: border-box;
   overflow: hidden;
   width: 540px;
@@ -250,7 +250,7 @@ position: relative;
     margin-left: 5% !important;
   }
 }
-.main_discription_top_left_shoes_text,
+.main_description_top_left_shoes_text,
 .main_discription_bottom_left_text{
   position: relative;
   color: white;
@@ -278,7 +278,7 @@ position: relative;
     margin-left: 75px;
   }
 }
-.main_discription_top_left_shoes_text{
+.main_description_top_left_shoes_text{
   width: 100px;
 }
 
@@ -369,7 +369,7 @@ position: relative;
 
 
 
-  .main_discription_top_left_shoes_add {
+  .main_description_top_left_shoes_add {
     width: 25px;
     height: 95px;
     background-image: url("../images/3_shoe_third_add.png");
@@ -385,7 +385,7 @@ position: relative;
   }
 
 
-.main_discription_top_left_shoes_button {
+.main_description_top_left_shoes_button {
   outline: none;
   width: 250px;
   height: 50px;
@@ -465,7 +465,7 @@ position: relative;
 
 // TOP_RIGHT_PICTURE
 
-.main_discription_top_right_shoes {
+.main_description_top_right_shoes {
   width: 640px;
   height: 255px;
   background-image: url("../images/4_shoe_second.png");
@@ -604,7 +604,7 @@ position: relative;
   }
 }
 
-  .main_discription_top_right_shoes_button {
+  .main_description_top_right_shoes_button {
     outline: none;
     width: 190px;
     height: 60px;
@@ -687,8 +687,8 @@ position: relative;
 
 //BOTOM LEFT
 
-.main_discription_bottom_left_shoes,
-.main_discription_bottom_right_shoes {
+.main_description_bottom_left_shoes,
+.main_description_bottom_right_shoes {
   width: 295px;
   height: 295px;
   float: right;
@@ -726,7 +726,7 @@ position: relative;
   }
 
 }
-.main_discription_bottom_left_shoes{
+.main_description_bottom_left_shoes{
   @media screen and (max-width: 769px){
     margin-right: 10px;
     margin-left: 35px;
@@ -870,7 +870,7 @@ position: relative;
 
 // BOTTOM RIGHT
 
-.main_discription_bottom_right_shoes {
+.main_description_bottom_right_shoes {
   margin-left: 0;
   background-image: url("../images/6_shoe_fift.jpg");
   background-repeat: no-repeat;
@@ -884,7 +884,7 @@ position: relative;
 }
 
 
-.main_discription_bottom_text_left{
+.main_description_bottom_text_left{
   width: 112px;
   color: white;
   font-family: 'Montserrat-Thin';
@@ -1003,7 +1003,7 @@ position: relative;
 
 // LABLE
 
-.main_discription_box_shoes_box{
+.main_description_box_shoes_box{
   margin: auto;
   margin-top: 50px;
   width:610px;
@@ -1017,7 +1017,7 @@ position: relative;
   }
 }
 
-.main_discription_box_shoes_row {
+.main_description_box_shoes_row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -1031,9 +1031,9 @@ position: relative;
   }
 }
 //
-.main_discription_box_shoes_one,
-.main_discription_box_shoes_three,
-.main_discription_box_shoes_two {
+.main_description_box_shoes_one,
+.main_description_box_shoes_three,
+.main_description_box_shoes_two {
   width: 1200px;
   height: 800px;
   clear: both;
@@ -1080,12 +1080,12 @@ position: relative;
   }
 }
 //
-.main_discription_box_shoes_two {
+.main_description_box_shoes_two {
   background: white;
   z-index: 1;
 }
 //
-.main_discription_box_shoes_three {
+.main_description_box_shoes_three {
   background: white;
   z-index: 2;
 }
@@ -1109,7 +1109,7 @@ label {
   // margin-left: 300px;
 }
 
-#first:checked~.main_discription_box_shoes_one {
+#first:checked~.main_description_box_shoes_one {
   z-index: 11;
 }
 //
@@ -1118,7 +1118,7 @@ label {
   color: #623232;
 }
 
-#second:checked~.main_discription_box_shoes_two {
+#second:checked~.main_description_box_shoes_two {
   z-index: 11;
 }
 //
@@ -1127,7 +1127,7 @@ label {
   color: #623232;
 }
 //
-#third:checked~.main_discription_box_shoes_three {
+#third:checked~.main_description_box_shoes_three {
   z-index: 11;
 }
 //
@@ -1212,7 +1212,7 @@ label {
 
 // BOX_SHOES
 
-.main_discription_box_brands{
+.main_description_box_brands{
   width: 1200px;
   height: 190px;
   position: relative;

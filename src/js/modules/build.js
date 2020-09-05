@@ -46,7 +46,7 @@ export class Builder {
 
     /////
 
-    createPouPup(product) {
+    createPageInformation(product) {
         // Left box //
         let pTitle = Builder.appChild(Builder.createNewElement("p", "title_poupap desPouPup"), [Builder.createNewElement("span", "spanFirst", "Title: "), Builder.createNewElement("span", null, product.name)]);
         let pSex = Builder.appChild(Builder.createNewElement("p", "sex_poupap desPouPup"), [Builder.createNewElement("span", "spanFirst", "Sex: "), Builder.createNewElement("span", null, product.sex)]);
@@ -74,8 +74,8 @@ export class Builder {
         rightBox.style.backgroundImage = "url(images/" + product.imgEl + ")"
 
         let pouPupContent = Builder.appChild(Builder.createNewElement("div", "content_PouPap"), [leftBox, rightBox]);
-        let pouPup = document.getElementById("PouPap").innerHTML = "";
-        pouPup = Builder.appChild(document.getElementById("PouPap"), [pouPupContent]);
+        let pouPup = document.getElementById("page_item_info").innerHTML = "";
+        pouPup = Builder.appChild(document.getElementById("page_item_info"), [pouPupContent]);
 
         return pouPup
     }
@@ -129,9 +129,9 @@ export class Builder {
 
             let CardBlockLeft = Builder.appChild(Builder.createNewElement("div", "item_of_card_block_left"), [itemOfCardTitle, itemOfCardPrice, itemSizeBox, buttonRemoveItem]);
             let CardBlockRight = Builder.appChild(Builder.createNewElement("div", "item_of_card_block_right"), [Builder.appChild(Builder.createNewElement("div", "item_of_card_desc item_of_card_title"), [Builder.createNewElement("span", null, "Description: "), Builder.createNewElement("span", "item_of_card_second_text", prod[i].desc)])])
-            let CardBlockCener = Builder.createNewElement("div", "item_of_card_block_centre");
-            CardBlockCener.style.backgroundImage = "url(images/" + prod[i].imgEl + ")";
-            let cartItem = Builder.appChild(Builder.createNewElement("div", "item_of_card"), [CardBlockLeft, CardBlockCener, CardBlockRight]);
+            let CardBlockCenter = Builder.createNewElement("div", "item_of_card_block_centre");
+            CardBlockCenter.style.backgroundImage = "url(images/" + prod[i].imgEl + ")";
+            let cartItem = Builder.appChild(Builder.createNewElement("div", "item_of_card"), [CardBlockLeft, CardBlockCenter, CardBlockRight]);
 
             cartItemBlockTop.appendChild(cartItem);  // => will add to boxOfCart
         }
@@ -139,8 +139,8 @@ export class Builder {
         ///////// => block bottom
         let commonGoods = Builder.appChild(Builder.createNewElement("p"), [Builder.createNewElement("span", "item_block_bottom_desc_first", "GOODS: "), Builder.createNewElement("span", "item_block_bottom_desc_second", prod.length + " items")])
         let commonSum = Builder.appChild(Builder.createNewElement("p"), [Builder.createNewElement("span", "item_block_bottom_desc_first", "SUM: "), Builder.createNewElement("span", "item_block_bottom_desc_second", "$" + sumCartPrice(prod))])
-        let BottonBuy = Builder.createNewElement("div", "buttom_cart_buy", "BUY", [{"name":"id", "value":"buttom_cart_buy"}]);
-        let cartItemBlockBottom = Builder.appChild(Builder.createNewElement("div", "item_block_bottom" ), [commonGoods, commonSum, BottonBuy] ); // => will add to boxOfCart
+        let ButtonBuy = Builder.createNewElement("div", "buttom_cart_buy", "BUY", [{"name":"id", "value":"buttom_cart_buy"}]);
+        let cartItemBlockBottom = Builder.appChild(Builder.createNewElement("div", "item_block_bottom" ), [commonGoods, commonSum, ButtonBuy] ); // => will add to boxOfCart
 
         ///////// => main box cart
         let boxOfCart = Builder.appChild(Builder.createNewElement("div", "box_of_cart", null, [{"name":"id", "value":"box_of_cart"}]), [cartItemBlockTop, cartItemBlockBottom]);
@@ -153,17 +153,17 @@ export class Builder {
         // console.log(cartCount)
     }
 
-
-    findeEl(classElemetns) {
-        let el = document.getElementsByClassName(classElemetns);
-        return el = Array.from(el)
-    }
+    //
+    // findeEl(classElemetns) {
+    //     let el = document.getElementsByClassName(classElemetns);
+    //     return el = Array.from(el)
+    // }
 }
 
 
 function countPercent(price, newPrice) {
-    let x = Math.ceil(100 - newPrice * 100 / price);
-    return +x
+    let count = Math.ceil(100 - newPrice * 100 / price);
+    return +count
 }
 
 

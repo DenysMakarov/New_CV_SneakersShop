@@ -1,46 +1,32 @@
 import {Data} from "./modules/data";
-
-let products = Data.loadProducts();
-
 import {Builder} from "./modules/build";
 
-let createCards = new Builder();
-let createPouPup = new Builder();
-let creatCart = new Builder();
-let createListOfOrders = new Builder();
+let builder = new Builder();
+let products = Data.loadProducts();
 
 let per_page = 6;
 let current = 0;
 
-
 let boxContent = document.getElementById("range_content_box");
 let paginationBox = document.getElementById("pag_box");
 
-let changeMan = document.getElementById("buttom_man");
-let changeWoman = document.getElementById("buttom_woman");
-let changeChildren = document.getElementById("buttom_children");
+let changeMan = document.getElementById("button_man");
+let changeWoman = document.getElementById("button_woman");
+let changeChildren = document.getElementById("button_children");
 
-let changeAll = document.getElementById("buttom_all");
-let sex = "sex", man = "man", woman = "woman", children = "children";
+let changeAll = document.getElementById("button_all");
 let searchForm = document.getElementById("search");
 let btn_search = document.getElementById("btn_search");
+let mainProd = products;
 
-
-// console.log(products[0].nameData);
-// console.dir(products[1]);
-
-
-let copyProd = [];
-let mainProd = copyProd.concat(products);
-
-function shareRender(prod) {
+function mainRender(prod) {
     renderProd(prod);
     renderPag(prod);
-    cheangePag(prod);
-    setTimeout(e => showEmount(), 10)
+    changePag(prod);
+    setTimeout(e => showAmount(), 10)
 }
 
-shareRender(mainProd);
+mainRender(mainProd);
 searchProd(mainProd);
 
 ///////     build amount items on the page
@@ -57,10 +43,10 @@ function renderProd(prod) {
     boxContent.innerHTML = "";
     for (let i = firstI(); secondI(i, prod); i++) {
         console.log(secondI(i, prod))
-        boxContent.appendChild(createCards.createCard(prod[i]))
+        boxContent.appendChild(builder.createCard(prod[i]))
     }
-    countPercent_AddCurrency("boxSale", "down_coast_shoe");
-    setNameForPoupPup()
+    countPercentAndAddCurrency("boxSale", "down_coast_shoe");
+    pageItemInformation()
 }
 
 function renderPag(prod) {
@@ -76,7 +62,7 @@ function renderPag(prod) {
     }
 }
 
-function cheangePag(prod) {
+function changePag(prod) {
     let countPag = Array.from(document.getElementsByClassName("pag_item"));
     countPag.map((el) => {
         el.addEventListener("click", (e) => {
@@ -97,32 +83,24 @@ function optionSex(prod, sexTarget) {
     return filterProd
 }
 
+let arrOptionSex = [changeMan, changeWoman, changeChildren]
+let arrIndex = ["man", "woman", "children"]
+// let sex = "sex", man = "man", woman = "woman", children = "children";
 
-changeMan.addEventListener("click", (e) => {
-    current = 0;
-    mainProd = optionSex(products, man);
-    shareRender(mainProd);
-    searchProd(mainProd);
-    return mainProd
-});
-changeWoman.addEventListener("click", (e) => {
-    current = 0;
-    mainProd = optionSex(products, woman);  // from modules
-    shareRender(mainProd);
-    searchProd(mainProd);
-    return mainProd
-});
-changeChildren.addEventListener("click", (e) => {
-    current = 0;
-    mainProd = optionSex(products, children);  // from modules
-    shareRender(mainProd);
-    searchProd(mainProd);
-    return mainProd
-});
+arrOptionSex.map((el, index)=>{
+    el.addEventListener("click", (e) => {
+        current = 0;
+        mainProd = optionSex(products, arrIndex[index]);
+        mainRender(mainProd);
+        searchProd(mainProd);
+        return mainProd
+    });
+})
+
 changeAll.addEventListener("click", (e) => {
     // paginationBox.innerHTML ="";
     mainProd = products;
-    shareRender(mainProd);
+    mainRender(mainProd);
     searchProd(mainProd);
     return mainProd
 });
@@ -133,14 +111,15 @@ function search(prod) {
     paginationBox.innerHTML = "";
     let searchRegExp = new RegExp(searchForm.value, ["i"]);
     prod = prod.filter(el => searchRegExp.test(el.name));
-    shareRender(prod);
+    mainRender(prod);
     return mainProd = prod;
+
 }
 
 function searchProd(prod) {
     btn_search.addEventListener("click", (e) => {
         search(prod);
-        setNameForPoupPup()
+        pageItemInformation()
     });
 
     searchForm.addEventListener("keypress", (e) => {
@@ -151,19 +130,19 @@ function searchProd(prod) {
 }
 
 
-function showEmount() {
+function showAmount() {
     document.getElementById("amountItem").innerHTML = "";
     if (mainProd.length > 0) {
         document.getElementById("amountItem").innerHTML = "AMOUNT ON THIS PAGE: " + mainProd.length
     } else {
-        document.getElementById("amountItem").innerHTML = "unfortunately nothing has found"
+        document.getElementById("amountItem").innerHTML = "unfortunately nothing has been found"
     }
 }
 
 /////////////////////////////
 
 // add currency and percent !!!!!!
-function countPercent_AddCurrency(boxSale, down_coast_shoe) {
+function countPercentAndAddCurrency(boxSale, down_coast_shoe) {
     let saleForBlock = Array.from(document.getElementsByClassName(boxSale));
     for (let i = 0; i < saleForBlock.length; i++) {
         if (saleForBlock[i].innerHTML == -Infinity) {
@@ -198,20 +177,19 @@ export function sumCartPrice(cartCount) {
 ////////////////////////
 
 let cartCount = [];
-
-function setNameForPoupPup() {
+function pageItemInformation() {
     let buttonsShowMore = Array.from(document.getElementsByClassName("show_more"));
-    buttonsShowMore = buttonsShowMore.map((el) => {
+    buttonsShowMore.map((el) => {
         el.addEventListener("click", (e) => {
             for (let i = 0; i < products.length; i++) {
                 if (products[i].nameData == el.dataset.name) {
-                    createPouPup.createPouPup(products[i]);
-                    // build Poupup =>
-                    countPercent_AddCurrency(" sale_price_shoe_pou_pup", "first_price_shoe_pou_pup")
-                    document.getElementById("PouPap").style.display = "block";
+                    builder.createPageInformation(products[i]);
+                    // build information page =>
+                    countPercentAndAddCurrency(" sale_price_shoe_pou_pup", "first_price_shoe_pou_pup")
+                    document.getElementById("page_item_info").style.display = "block";
                     (function () {
                         document.getElementById("exit_button").addEventListener("click", (e) => {
-                            document.getElementById("PouPap").style.display = "none";
+                            document.getElementById("page_item_info").style.display = "none";
                         });
                     })();
 
@@ -223,7 +201,7 @@ function setNameForPoupPup() {
     })
 }
 
-creatCart.createCartFixed(cartCount)
+builder.createCartFixed(cartCount)
 
 function createCartList() {
     let buttonsBuy = document.getElementById("buton_buy");
@@ -232,10 +210,9 @@ function createCartList() {
             if (products[i].nameData == buttonsBuy.dataset.name) {
 
                 cartCount.push(products[i]);
-                creatCart.createBoxWish(cartCount);
-                creatCart.createCartFixed(cartCount)//???
-                cartEmpty();
-
+                builder.createBoxWish(cartCount);
+                builder.createCartFixed(cartCount)//???
+                cartSummarize();
 
                 document.getElementById("cart_summarise_prise").innerHTML = "$" + sumCartPrice(cartCount); // => top cart;
                 document.getElementById("cart_summarise_prise425").innerHTML = "$" + sumCartPrice(cartCount) // => top cart;
@@ -250,7 +227,7 @@ function openCartList(cartEl) {
     let cartList = document.getElementById("cart_list");
     cartList.innerHTML = ""
 
-    createListOfOrders.createTableOfOrders(cartCount);
+    builder.createTableOfOrders(cartCount);
 
     let removeArr = Array.from(document.getElementsByClassName("remove_item_card"))
     removeArr = removeArr.map((el) => {
@@ -278,9 +255,9 @@ function openCartList(cartEl) {
             document.getElementById("cart_summarise_prise").innerHTML = "$" + sumCartPrice(cartCount); // => top cart;
             document.getElementById("cart_summarise_prise425").innerHTML = "$" + sumCartPrice(cartCount) //
 
-            creatCart.createBoxWish(cartCount);
-            creatCart.createCartFixed(cartCount)//???
-            cartEmpty()
+            builder.createBoxWish(cartCount);
+            builder.createCartFixed(cartCount)//???
+            cartSummarize()
         })
     })
 
@@ -297,7 +274,7 @@ openCartList("fixed_cart");
 openCartList("nav_item_cart");
 openCartList("basket425");
 
-function cartEmpty() {
+function cartSummarize() {
     let cordCount = document.getElementById("cordCount")
     if (cartCount.length == 0) {
         cordCount.innerHTML = "Empty";
@@ -308,5 +285,5 @@ function cartEmpty() {
         cordCount.innerHTML = cartCount.length + " = " + "$" +sumCartPrice(cartCount)
     }
 }
-cartEmpty();
+cartSummarize();
 
