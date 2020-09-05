@@ -185,7 +185,7 @@ function pageItemInformation() {
                 if (products[i].nameData == el.dataset.name) {
                     builder.createPageInformation(products[i]);
                     // build information page =>
-                    countPercentAndAddCurrency(" sale_price_shoe_pou_pup", "first_price_shoe_pou_pup")
+                    countPercentAndAddCurrency(" sale_price_shoe_page_info", "first_price_shoe_page_info")
                     document.getElementById("page_item_info").style.display = "block";
                     (function () {
                         document.getElementById("exit_button").addEventListener("click", (e) => {
@@ -204,7 +204,7 @@ function pageItemInformation() {
 builder.createCartFixed(cartCount)
 
 function createCartList() {
-    let buttonsBuy = document.getElementById("buton_buy");
+    let buttonsBuy = document.getElementById("button_buy");
     buttonsBuy.addEventListener("click", (e) => {
         for (let i = 0; i < products.length; i++) {
             if (products[i].nameData == buttonsBuy.dataset.name) {

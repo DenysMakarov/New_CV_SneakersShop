@@ -48,24 +48,24 @@ export class Builder {
 
     createPageInformation(product) {
         // Left box //
-        let pTitle = Builder.appChild(Builder.createNewElement("p", "title_poupap desPouPup"), [Builder.createNewElement("span", "spanFirst", "Title: "), Builder.createNewElement("span", null, product.name)]);
-        let pSex = Builder.appChild(Builder.createNewElement("p", "sex_poupap desPouPup"), [Builder.createNewElement("span", "spanFirst", "Sex: "), Builder.createNewElement("span", null, product.sex)]);
-        let pSize = Builder.appChild(Builder.createNewElement("p", "size_poupap desPouPup"), [Builder.createNewElement("span", "spanFirst", "Size: "), Builder.createNewElement("span", null, product.size)]);
-        let pDescr = Builder.appChild(Builder.createNewElement("p", "description_poupap desPouPup"), [Builder.createNewElement("span", "spanFirst", "Description: "), Builder.createNewElement("span", null, product.desc)]);
-        let buttonBuy = Builder.createNewElement("button", "buton_buy", "BUY NOW", [{
+        let title = Builder.appChild(Builder.createNewElement("p", "title_page_info des_page_info"), [Builder.createNewElement("span", "spanFirst", "Title: "), Builder.createNewElement("span", null, product.name)]);
+        let sex = Builder.appChild(Builder.createNewElement("p", "sex_page_info des_page_info"), [Builder.createNewElement("span", "spanFirst", "Sex: "), Builder.createNewElement("span", null, product.sex)]);
+        let size = Builder.appChild(Builder.createNewElement("p", "size_page_info des_page_info"), [Builder.createNewElement("span", "spanFirst", "Size: "), Builder.createNewElement("span", null, product.size)]);
+        let description = Builder.appChild(Builder.createNewElement("p", "description_page_info des_page_info"), [Builder.createNewElement("span", "spanFirst", "Description: "), Builder.createNewElement("span", null, product.desc)]);
+        let buttonBuy = Builder.createNewElement("button", "button_buy", "BUY NOW", [{
             "name": "id",
-            "value": "buton_buy"
+            "value": "button_buy"
         }, {"name": "data-name", "value": product.nameData}]);
-        let leftBox = Builder.appChild(Builder.createNewElement("div", "content_PouPap_box_left"), [pTitle, pSex, pSize, pDescr, buttonBuy]);
+        let leftBox = Builder.appChild(Builder.createNewElement("div", "content_page_info_box_left"), [title, sex, size, description, buttonBuy]);
         // Right box //
         let exitButton = Builder.appChild(Builder.createNewElement("div", "exit_button", null, [{
             "name": "id",
             "value": "exit_button"
         }]), [Builder.createNewElement("div", "lineOne"), Builder.createNewElement("div", "lineSecond")]);
-        let rightBox = Builder.appChild(Builder.createNewElement("div", "content_PouPap_box_right", null, [{
+        let rightBox = Builder.appChild(Builder.createNewElement("div", "content_page_info_box_right", null, [{
             "name": "id",
-            "value": "content_PouPap_box_right"
-        }]), [exitButton, Builder.createNewElement("div", "main_price_shoe_pou_pup", "$" + product.price), Builder.createNewElement("div", "first_price_shoe_pou_pup", product.priceDown), Builder.createNewElement("div", "sale_price_shoe_pou_pup", countPercent(product.priceDown, product.price)),
+            "value": "content_page_info_box_right"
+        }]), [exitButton, Builder.createNewElement("div", "main_price_shoe_page_info", "$" + product.price), Builder.createNewElement("div", "first_price_shoe_page_info", product.priceDown), Builder.createNewElement("div", "sale_price_shoe_page_info", countPercent(product.priceDown, product.price)),
             Builder.createNewElement("div", "cart_wrap_box", null, [{
             "name": "id",
             "value": "cart_wrap_box"
@@ -73,11 +73,11 @@ export class Builder {
             ]);
         rightBox.style.backgroundImage = "url(images/" + product.imgEl + ")"
 
-        let pouPupContent = Builder.appChild(Builder.createNewElement("div", "content_PouPap"), [leftBox, rightBox]);
-        let pouPup = document.getElementById("page_item_info").innerHTML = "";
-        pouPup = Builder.appChild(document.getElementById("page_item_info"), [pouPupContent]);
+        let pageItemContent = Builder.appChild(Builder.createNewElement("div", "content_page_info"), [leftBox, rightBox]);
+        let pageItemInformation = document.getElementById("page_item_info").innerHTML = "";
+        pageItemInformation = Builder.appChild(document.getElementById("page_item_info"), [pageItemContent]);
 
-        return pouPup
+        return pageItemInformation
     }
 
     createBoxWish(cartCount) {
