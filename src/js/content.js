@@ -281,7 +281,7 @@ function cartSummarize() {
         document.getElementById("fixed_cart").style.width = "130px";
         document.getElementById("cart_summarise_prise").innerHTML = "$0"
     } else if (cartCount.length != 0) {
-        document.getElementById("fixed_cart").style.width = "165px";
+        document.getElementById("fixed_cart").style.width = "180px";
         cordCount.innerHTML = cartCount.length + " = " + "$" +sumCartPrice(cartCount)
     }
 }
