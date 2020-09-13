@@ -1,6 +1,8 @@
 
 // import "../node_modules/jquery/src/jquery";
 // import "./js/slick-1.8.1/slick/slick.min";
+
+
 import "./js/slick";
 import "./js/modules/forms";
 import "./js/content"

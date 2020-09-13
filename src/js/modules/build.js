@@ -14,11 +14,11 @@ export class Builder {
         return el
     }
 
-    static appChild(parrent, children) {
+    static appChild(parent, children) {
         children.map((el) => {
-            parrent.appendChild(el)
+            parent.appendChild(el)
         });
-        return parrent
+        return parent
     }
 
 
@@ -150,14 +150,7 @@ export class Builder {
         let ListOfOrders = Builder.appChild(ListOfOrdersWrap, [exitButtonCart, boxOfCart])
 
         return ListOfOrders;
-        // console.log(cartCount)
     }
-
-    //
-    // findeEl(classElemetns) {
-    //     let el = document.getElementsByClassName(classElemetns);
-    //     return el = Array.from(el)
-    // }
 }
 
 

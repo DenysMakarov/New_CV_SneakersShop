@@ -1,11 +1,14 @@
 import {Data} from "./modules/data";
 import {Builder} from "./modules/build";
+import {animationOptionSex, btnChangeAll, changeOptionOnClick} from "./modules/optionSexProd";
 
-let builder = new Builder();
-let products = Data.loadProducts();
+
+const BuilderComponent = new Builder();
+export const products = Data.loadProducts();
 
 let per_page = 6;
 let current = 0;
+let mainProd = products;
 
 let boxContent = document.getElementById("range_content_box");
 let paginationBox = document.getElementById("pag_box");
@@ -13,42 +16,35 @@ let paginationBox = document.getElementById("pag_box");
 let changeMan = document.getElementById("button_man");
 let changeWoman = document.getElementById("button_woman");
 let changeChildren = document.getElementById("button_children");
-
 let changeAll = document.getElementById("button_all");
+
 let searchForm = document.getElementById("search");
 let btn_search = document.getElementById("btn_search");
-let mainProd = products;
 
-function mainRender(prod) {
-    renderProd(prod);
-    renderPag(prod);
-    changePag(prod);
-    setTimeout(e => showAmount(), 10)
-}
 
-mainRender(mainProd);
-searchProd(mainProd);
-
-///////     build amount items on the page
+// COUNT AND PAGE PRODUCTS --- !
 function firstI() {
     return current * per_page;
-};
+}
 
 function secondI(i, prod) {
     return i < current * per_page + per_page && i < prod.length;
-};
+}
 
 
+// RENDER PRODUCTS --- !
 function renderProd(prod) {
     boxContent.innerHTML = "";
     for (let i = firstI(); secondI(i, prod); i++) {
         console.log(secondI(i, prod))
-        boxContent.appendChild(builder.createCard(prod[i]))
+        boxContent.appendChild(BuilderComponent.createCard(prod[i]))
     }
     countPercentAndAddCurrency("boxSale", "down_coast_shoe");
     pageItemInformation()
 }
 
+
+// CREATE PAGINATION --- !
 function renderPag(prod) {
     paginationBox.innerHTML = "";
     for (let i = 0; i < Math.ceil(prod.length / per_page); i++) {
@@ -68,8 +64,6 @@ function changePag(prod) {
         el.addEventListener("click", (e) => {
             current = el.dataset.name;
             renderProd(prod);
-            console.log("current " + current);
-            // searchProd(prod, paginationBox);
             for (let i = 0; i < countPag.length; i++) {
                 countPag[i].classList.remove("active_pag");
             }
@@ -78,45 +72,52 @@ function changePag(prod) {
     })
 }
 
-function optionSex(prod, sexTarget) {
-    let filterProd = prod.filter(el => el.sex === sexTarget);
-    return filterProd
-}
 
-let arrOptionSex = [changeMan, changeWoman, changeChildren]
-let arrIndex = ["man", "woman", "children"]
-// let sex = "sex", man = "man", woman = "woman", children = "children";
+animationOptionSex()
 
-arrOptionSex.map((el, index)=>{
-    el.addEventListener("click", (e) => {
-        current = 0;
-        mainProd = optionSex(products, arrIndex[index]);
-        mainRender(mainProd);
-        searchProd(mainProd);
-        return mainProd
-    });
-})
+// export function optionSex(prod, sexTarget) {
+//     let filterProd = prod.filter(el => el.sex === sexTarget);
+//     return filterProd
+// }
+//
+// let arrOptionSex = [changeMan, changeWoman, changeChildren]
+// let arrIndex = ["man", "woman", "children"]
+//
+// arrOptionSex.map((el, index)=>{
+//     el.addEventListener("click", (e) => {
+//         current = 0;
+//         mainProd = optionSex(products, arrIndex[index]);
+//         mainRender(mainProd)
+//             .then(()=>{
+//                 searchProd(mainProd)
+//             });
+//         return mainProd
+//     });
+// })
 
-changeAll.addEventListener("click", (e) => {
-    // paginationBox.innerHTML ="";
-    mainProd = products;
-    mainRender(mainProd);
-    searchProd(mainProd);
-    return mainProd
-});
+changeOptionOnClick(current, mainProd, products)
+btnChangeAll(mainProd)
+
+// changeAll.addEventListener("click", (e) => {
+//     mainProd = products;
+//     mainRender(mainProd);
+//     searchProd(mainProd);
+//     return mainProd
+// });
 
 
-function search(prod) {
+
+//SEARCH PRODUCT --- !
+export function search(prod) {
     current = 0;
     paginationBox.innerHTML = "";
     let searchRegExp = new RegExp(searchForm.value, ["i"]);
     prod = prod.filter(el => searchRegExp.test(el.name));
     mainRender(prod);
     return mainProd = prod;
-
 }
 
-function searchProd(prod) {
+export function searchProd(prod) {
     btn_search.addEventListener("click", (e) => {
         search(prod);
         pageItemInformation()
@@ -129,8 +130,8 @@ function searchProd(prod) {
     });
 }
 
-
-function showAmount() {
+// COUNT ITEM ON THE PAGE --- !
+export function showAmount(mainProd) {
     document.getElementById("amountItem").innerHTML = "";
     if (mainProd.length > 0) {
         document.getElementById("amountItem").innerHTML = "AMOUNT ON THIS PAGE: " + mainProd.length
@@ -183,7 +184,7 @@ function pageItemInformation() {
         el.addEventListener("click", (e) => {
             for (let i = 0; i < products.length; i++) {
                 if (products[i].nameData == el.dataset.name) {
-                    builder.createPageInformation(products[i]);
+                    BuilderComponent.createPageInformation(products[i]);
                     // build information page =>
                     countPercentAndAddCurrency(" sale_price_shoe_page_info", "first_price_shoe_page_info")
                     document.getElementById("page_item_info").style.display = "block";
@@ -201,7 +202,7 @@ function pageItemInformation() {
     })
 }
 
-builder.createCartFixed(cartCount)
+BuilderComponent.createCartFixed(cartCount)
 
 function createCartList() {
     let buttonsBuy = document.getElementById("button_buy");
@@ -210,8 +211,8 @@ function createCartList() {
             if (products[i].nameData == buttonsBuy.dataset.name) {
 
                 cartCount.push(products[i]);
-                builder.createBoxWish(cartCount);
-                builder.createCartFixed(cartCount)//???
+                BuilderComponent.createBoxWish(cartCount);
+                BuilderComponent.createCartFixed(cartCount)//???
                 cartSummarize();
 
                 document.getElementById("cart_summarise_prise").innerHTML = "$" + sumCartPrice(cartCount); // => top cart;
@@ -227,7 +228,7 @@ function openCartList(cartEl) {
     let cartList = document.getElementById("cart_list");
     cartList.innerHTML = ""
 
-    builder.createTableOfOrders(cartCount);
+    BuilderComponent.createTableOfOrders(cartCount);
 
     let removeArr = Array.from(document.getElementsByClassName("remove_item_card"))
     removeArr = removeArr.map((el) => {
@@ -255,8 +256,8 @@ function openCartList(cartEl) {
             document.getElementById("cart_summarise_prise").innerHTML = "$" + sumCartPrice(cartCount); // => top cart;
             document.getElementById("cart_summarise_prise425").innerHTML = "$" + sumCartPrice(cartCount) //
 
-            builder.createBoxWish(cartCount);
-            builder.createCartFixed(cartCount)//???
+            BuilderComponent.createBoxWish(cartCount);
+            BuilderComponent.createCartFixed(cartCount)//???
             cartSummarize()
         })
     })
@@ -286,4 +287,17 @@ function cartSummarize() {
     }
 }
 cartSummarize();
+
+export async function mainRender(prod){
+    await renderProd(prod);
+    await renderPag(prod);
+    await changePag(prod);
+    await showAmount(mainProd)
+}
+
+
+mainRender(mainProd)
+    .then(()=>{
+        searchProd(mainProd)
+    })
 

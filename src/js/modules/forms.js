@@ -6,7 +6,7 @@ const loginTest = new isLogin();
 let buttonShowContent = document.getElementById("show_content");
 let buttonSubmit = document.getElementById("button_submit");
 let logoutButton = document.getElementById("logout");
-let buttonShowContentTrue = 0;
+let buttonShowContentTrue = false;
 
 
 let submitHandler = (e) => {
@@ -64,11 +64,11 @@ let submitHandler = (e) => {
     switch (passErr.length == 0 && emailErr.length == 0) {
         case true :
             loginTest.loginFalse(buttonShowContent, buttonSubmit, buttonShowContentTrue);
-            buttonShowContentTrue = 1;
+            buttonShowContentTrue = true;
             break;
         case false :
             loginTest.loginTrue(buttonShowContent, buttonSubmit, buttonShowContentTrue);
-            buttonShowContentTrue = 0
+            buttonShowContentTrue = false
     }
 
     if (passErr.length != 0 && emailErr.length != 0) {
@@ -91,13 +91,13 @@ function wrongSubmit(buttonSubmit) {
     })
 }
 
-// FUNCTIOUN TEST
+// FUNCTION TEST
 function addShowContentEvent() {
     switch (buttonShowContentTrue) {
-        case 1 :
+        case true :
             loginTest.BSCTrue();
             break;                       //// => from module
-        case 0 :
+        case false :
             loginTest.BSCFalse()         //// => from module
     }
 }
@@ -109,13 +109,4 @@ logoutButton.addEventListener("click", () => {
 });
 
 
-let arrBottomsOption = Array.from(document.getElementsByClassName("button_option"));
-for (let i = 0; i < arrBottomsOption.length; i++) {
-    arrBottomsOption[i].addEventListener("click", (e) => {
-        for (let i = 0; i < arrBottomsOption.length; i++) {
-            arrBottomsOption[i].classList.remove("button_option_untouch")
-        }
-        e.target.classList.add("button_option_untouch")
-    });
-}
 

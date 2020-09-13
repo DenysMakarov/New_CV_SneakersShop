@@ -25,7 +25,6 @@ const load_products = [
     {"name":"Nike Nexus", "price": 67.50, "priceDown": 87.50, "boxSale": 25, "sex": "woman", "imgEl": "shoe_item_8.png", "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci alias aliquid autem nesciunt officiis quam tenetur ullam? Asperiores, ex explicabo iure magnam molestias mollitia nostrum odio quam, quas similique tenetur.", "size": [43, 45]},
     {"name":"Reebok Star", "price": 180.50, "priceDown": 225.00, "boxSale": 15, "sex": "woman", "imgEl": "shoe_item_8.png", "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci alias aliquid autem nesciunt officiis quam tenetur ullam? Asperiores, ex explicabo iure magnam molestias mollitia nostrum odio quam, quas similique tenetur.", "size": [39, 41]}
 
-
 ];
 
 
