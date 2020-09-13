@@ -117,10 +117,8 @@ export class Builder {
             let SelectSize = Builder.createNewElement("select", "select_size");
 
             for (let j = 0; j < prod[i].size.length; j++) {
-                let x = Builder.createNewElement("option", "option", prod[i].size[j]);
-                SelectSize.appendChild(x)
+                SelectSize.appendChild(Builder.createNewElement("option", "option", prod[i].size[j]))
             }
-            // console.log(SelectSize);
 
             let itemSizeBox = Builder.appChild(Builder.createNewElement("div", "item_of_card_desc item_of_card_size"),[Builder.createNewElement("span", null, "Chose size: "), SelectSize])
             let itemOfCardTitle =  Builder.appChild(Builder.createNewElement("div", "item_of_card_desc item_of_card_title"),[Builder.createNewElement("span", null, "Title: "), Builder.createNewElement("span", "item_of_card_second_text", prod[i].name)]);

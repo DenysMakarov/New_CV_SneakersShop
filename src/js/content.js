@@ -13,11 +13,6 @@ let mainProd = products;
 let boxContent = document.getElementById("range_content_box");
 let paginationBox = document.getElementById("pag_box");
 
-let changeMan = document.getElementById("button_man");
-let changeWoman = document.getElementById("button_woman");
-let changeChildren = document.getElementById("button_children");
-let changeAll = document.getElementById("button_all");
-
 let searchForm = document.getElementById("search");
 let btn_search = document.getElementById("btn_search");
 
@@ -74,38 +69,8 @@ function changePag(prod) {
 
 
 animationOptionSex()
-
-// export function optionSex(prod, sexTarget) {
-//     let filterProd = prod.filter(el => el.sex === sexTarget);
-//     return filterProd
-// }
-//
-// let arrOptionSex = [changeMan, changeWoman, changeChildren]
-// let arrIndex = ["man", "woman", "children"]
-//
-// arrOptionSex.map((el, index)=>{
-//     el.addEventListener("click", (e) => {
-//         current = 0;
-//         mainProd = optionSex(products, arrIndex[index]);
-//         mainRender(mainProd)
-//             .then(()=>{
-//                 searchProd(mainProd)
-//             });
-//         return mainProd
-//     });
-// })
-
 changeOptionOnClick(current, mainProd, products)
 btnChangeAll(mainProd)
-
-// changeAll.addEventListener("click", (e) => {
-//     mainProd = products;
-//     mainRender(mainProd);
-//     searchProd(mainProd);
-//     return mainProd
-// });
-
-
 
 //SEARCH PRODUCT --- !
 export function search(prod) {
@@ -130,6 +95,7 @@ export function searchProd(prod) {
     });
 }
 
+
 // COUNT ITEM ON THE PAGE --- !
 export function showAmount(mainProd) {
     document.getElementById("amountItem").innerHTML = "";
@@ -140,9 +106,9 @@ export function showAmount(mainProd) {
     }
 }
 
-/////////////////////////////
 
-// add currency and percent !!!!!!
+
+// ADD CURRENCY AND PERCENT --- !
 function countPercentAndAddCurrency(boxSale, down_coast_shoe) {
     let saleForBlock = Array.from(document.getElementsByClassName(boxSale));
     for (let i = 0; i < saleForBlock.length; i++) {
@@ -160,23 +126,9 @@ function countPercentAndAddCurrency(boxSale, down_coast_shoe) {
     }
 }
 
-// function => count common sum in cart   => ??? did not succeeded only use reduce ???
-export function sumCartPrice(cartCount) {
-    let x = [];
-    if (cartCount != 0) {
-        let y = cartCount.map((el) => {
-            x.push(el.price)
-        });
-        x = x.reduce(function (a, b) {
-            return a + b
-        });
-    }
-    return x
-}
 
 
-////////////////////////
-
+// CREATE CART LIST TO BUY --- !
 let cartCount = [];
 function pageItemInformation() {
     let buttonsShowMore = Array.from(document.getElementsByClassName("show_more"));
@@ -185,6 +137,7 @@ function pageItemInformation() {
             for (let i = 0; i < products.length; i++) {
                 if (products[i].nameData == el.dataset.name) {
                     BuilderComponent.createPageInformation(products[i]);
+
                     // build information page =>
                     countPercentAndAddCurrency(" sale_price_shoe_page_info", "first_price_shoe_page_info")
                     document.getElementById("page_item_info").style.display = "block";
@@ -202,6 +155,19 @@ function pageItemInformation() {
     })
 }
 
+// function => count common sum in cart   => ??? did not succeeded only use reduce ???
+export function sumCartPrice(cartCount) {
+    let arrPrice = [];
+    if (cartCount != 0) {
+        cartCount.map((el) => {
+            arrPrice.push(el.price)
+        });
+        arrPrice = arrPrice.reduce(function (a, b) {
+            return a + b
+        });
+    }
+    return arrPrice
+}
 BuilderComponent.createCartFixed(cartCount)
 
 function createCartList() {
@@ -222,13 +188,12 @@ function createCartList() {
     });
 }
 
-function openCartList(cartEl) {
-
-    let cart = document.getElementById(cartEl);
+function openAndRemoveItemOfCartList(cartEl) {
     let cartList = document.getElementById("cart_list");
     cartList.innerHTML = ""
 
     BuilderComponent.createTableOfOrders(cartCount);
+    cartList.style.display = "block"
 
     let removeArr = Array.from(document.getElementsByClassName("remove_item_card"))
     removeArr = removeArr.map((el) => {
@@ -237,21 +202,14 @@ function openCartList(cartEl) {
         }
     });
 
-    cart.addEventListener("click", (e) => {
-        cartList.style.display = "block";
-        openCartList("fixed_cart")
-    });
-
-
     let btnRemove = Array.from(document.getElementsByClassName("remove_item_card"));
     btnRemove.map((el) => {
         el.addEventListener("click", (e) => {
-            let x = +e.target.dataset.remove;
-
-            cartCount.splice(x, 1)
+            let itemRemove = +e.target.dataset.remove;
+            cartCount.splice(itemRemove, 1)
 
             cartList.style.display = "block";
-            openCartList("fixed_cart");
+            openAndRemoveItemOfCartList("fixed_cart");
 
             document.getElementById("cart_summarise_prise").innerHTML = "$" + sumCartPrice(cartCount); // => top cart;
             document.getElementById("cart_summarise_prise425").innerHTML = "$" + sumCartPrice(cartCount) //
@@ -262,18 +220,19 @@ function openCartList(cartEl) {
         })
     })
 
-
     let exit = document.getElementById("exit_cart")
     exit.addEventListener("click", (e) => {
         cartList.innerHTML = "";
         cartList.style.display = "none"
     })
-
 }
 
-openCartList("fixed_cart");
-openCartList("nav_item_cart");
-openCartList("basket425");
+// BTN OF CARTS (TOP, BOTTOM, MOBILE) --- !
+let arrCartButton = [document.getElementById("fixed_cart"),document.getElementById("nav_item_cart"),document.getElementById("basket425")]
+arrCartButton.map(el => el.addEventListener("click", ()=>{
+    openAndRemoveItemOfCartList("fixed_cart")
+}))
+
 
 function cartSummarize() {
     let cordCount = document.getElementById("cordCount")
@@ -287,6 +246,7 @@ function cartSummarize() {
     }
 }
 cartSummarize();
+
 
 export async function mainRender(prod){
     await renderProd(prod);
