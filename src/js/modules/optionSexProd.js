@@ -51,6 +51,7 @@ export function btnChangeAll(mainProd) {
         mainRender(mainProd)
             .then(()=>{
                 searchProd(mainProd)
+                showAmount(mainProd)
             });
         return mainProd
     });
