@@ -68,9 +68,11 @@ function changePag(prod) {
 }
 
 
+// OPTIONS OF PRODUCTS --- !
 animationOptionSex()
 changeOptionOnClick(current, mainProd, products)
 btnChangeAll(mainProd)
+
 
 //SEARCH PRODUCT --- !
 export function search(prod) {
