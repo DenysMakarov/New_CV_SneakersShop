@@ -1,1 +1,1 @@
-Project is being redeveloped now by Node.js
+Project is being redeveloped by Node.js
